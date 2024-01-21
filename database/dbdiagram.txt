@@ -1,0 +1,72 @@
+Table customers {
+  id integer [primary key]
+  firstName varchar
+  lastName varchar
+  email varchar
+  dateOfBirth date
+  gender varchar
+  password varchar
+}
+
+Table addresses {
+  id integer [primary key]
+  customerId integer
+  street varchar
+  city varchar
+  state varchar
+  postalCode varchar
+  country varchar
+}
+
+Table warehouses {
+  id integer [primary key]
+  name varchar
+}
+
+Table productItems {
+  id integer [primary key]
+  productSku varchar
+  warehouseId integer
+}
+
+Table productCarts {
+  id integer [primary key]
+  productItemId integer
+  cartId integer
+}
+
+Table carts {
+  id integer [primary key]
+  customerId integer
+  state cartState
+}
+
+enum cartState {
+    created [note: 'Waiting to be checkout']
+    reserved [note: 'Customer prepare to checkout']
+    confirmed
+    cancelled
+}
+
+
+Table products {
+  sku varchar [primary key]
+  name varchar
+  categoryId integer
+  description text
+  price integer
+  attributes jsonb
+}
+
+Table categories {
+  id integer [primary key]
+  name varchar
+}
+
+Ref: addresses.customerId > customers.id
+Ref: products.categoryId > categories.id
+Ref: productItems.warehouseId > warehouses.id
+Ref: productItems.productSku > products.sku
+Ref: productCarts.productItemId - productItems.id
+Ref: productCarts.cartId - carts.id
+Ref: carts.customerId > customers.id
