@@ -1,3 +1,6 @@
+Table configs {
+  precision integer
+}
 Table customers {
   id integer [primary key]
   firstName varchar
