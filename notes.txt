@@ -1,0 +1,15 @@
+# Runing rest api
+# Dev
+# make sure all python requirement is already installed
+# If not?
+cd rest-api
+pip install -r rest.requirements.txt
+export PYTHONPATH=$PWD
+uvicorn rest.main:app --host 0.0.0.0 --port 8888 --reload
+# App would be avaialble on 0.0.0.0:8888
+
+# Docker
+cd rest-api
+dokcer-compose up -d
+
+ 
