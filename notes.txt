@@ -1,4 +1,4 @@
-# Runing rest api
+# Running rest api
 # Dev
 # make sure all python requirement is already installed
 # If not?
@@ -12,4 +12,11 @@ uvicorn rest.main:app --host 0.0.0.0 --port 8888 --reload
 cd rest-api
 dokcer-compose up -d
 
- 
+# Runing coding
+# Test
+# make sure all python requirement is already installed
+# If not?
+cd coding
+pip install -r coding.requirements.txt
+export PYTHONPATH=$PWD
+python -m unittest discover -s tests -p '**/test_*.py'

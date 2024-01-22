@@ -26,16 +26,18 @@ Table warehouses {
   name varchar
 }
 
-Table productItems {
+Table warehouseProducts {
   id integer [primary key]
   productSku varchar
   warehouseId integer
+  quantity integer
 }
 
-Table productCarts {
+Table cartProducts {
   id integer [primary key]
-  productItemId integer
+  warehouseProductId integer
   cartId integer
+  quantity integer
 }
 
 Table carts {
@@ -50,7 +52,6 @@ enum cartState {
     confirmed
     cancelled
 }
-
 
 Table products {
   sku varchar [primary key]
@@ -68,8 +69,8 @@ Table categories {
 
 Ref: addresses.customerId > customers.id
 Ref: products.categoryId > categories.id
-Ref: productItems.warehouseId > warehouses.id
-Ref: productItems.productSku > products.sku
-Ref: productCarts.productItemId - productItems.id
-Ref: productCarts.cartId - carts.id
+Ref: cartProducts.cartId - carts.id
 Ref: carts.customerId > customers.id
+Ref: warehouseProducts.productSku > products.sku
+Ref: warehouseProducts.warehouseId > warehouses.id
+Ref: cartProducts.warehouseProductId > warehouseProducts.id
